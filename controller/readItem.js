@@ -1,12 +1,11 @@
 const fs = require('fs');
 const { HashedString } =  require('../ConvertHashed');
-const { memo } = require('../server');
 
 class ReadItem{
     handleRequest(req,res){
         const key = req.params.key;
 
-        if(key.length !== 32){
+        if(key.length > 32){
             return res.status(400).send("Key should be of 32 characters");
         }
         
@@ -32,14 +31,14 @@ class ReadItem{
                 else{
                     if((found.ttl === -1) || (((Date.now()/1000)-found.createdOn) < found.ttl)){
                         memo[hashedNumber] = false;
-                        return res.status(200).json({"key" : found.key,"value":found.value});
+                        return res.status(200).json({"value":found.value});
                     }
                     else{
                         userData.splice(userData.findIndex(ele => ele.key === key) , 1);
                         let json_data = JSON.stringify(userData);
                         fs.writeFileSync(path, json_data);
                         memo[hashedNumber] = false;
-                        return res.status(200).json({"data" : user});
+                        return res.status(200).json({"data" : found});
                     }
                 }
             }
