@@ -8,7 +8,7 @@ class CreateItem{
         const ttl = req.body.ttl === undefined ? -1 : req.body.ttl;
         const createdOn = Date.now()/1000;
 
-        if(key.length > 32 || key.length < 32){
+        if(key.length !== 32){
             return res.status(400).send("Key should be of 32 characters");
         }
 

@@ -5,7 +5,7 @@ class ReadItem{
     handleRequest(req,res){
         const key = req.params.key;
 
-        if(key.length > 32 || key.length < 32){
+        if(key.length !== 32){
             return res.status(400).send("Key should be of 32 characters");
         }
 
@@ -24,11 +24,7 @@ class ReadItem{
                     return res.status(200).send("Key doesn't exist");
                 }
                 else{
-
-                    if(found.ttl === -1){
-                        return res.status(200).json({"key" : found.key,"value":found.value});
-                    }
-                    else if(((Date.now()/1000)-found.createdOn) < found.ttl){
+                    if((found.ttl === -1) || (((Date.now()/1000)-found.createdOn) < found.ttl)){
                         return res.status(200).json({"key" : found.key,"value":found.value});
                     }
                     else{
