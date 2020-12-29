@@ -26,25 +26,25 @@ class ReadItem{
 
                 if(found === undefined){
                     memo[hashedNumber] = false;
-                    return res.status(200).send("Key doesn't exist");
+                    return res.status(405).send("Key doesn't exist");
                 }
                 else{
-                    if((found.ttl === -1) || (((Date.now()/1000)-found.createdOn) < found.ttl)){
+                    if((found.ttl == -1) || (((Date.now()/1000)-found.createdOn) < found.ttl)){
                         memo[hashedNumber] = false;
-                        return res.status(200).json({"value":found.value});
+                        return res.status(201).json({"value":found.value});
                     }
                     else{
                         userData.splice(userData.findIndex(ele => ele.key === key) , 1);
                         let json_data = JSON.stringify(userData);
                         fs.writeFileSync(path, json_data);
                         memo[hashedNumber] = false;
-                        return res.status(200).json({"data" : found});
+                        return res.status(405).send("Key is expired");
                     }
                 }
             }
             else{
                 memo[hashedNumber] = false;
-                return res.status(200).send("File doesn't exist");
+                return res.status(405).send("File doesn't exist");
             }
         } catch(err) {
             memo[hashedNumber] = false;
