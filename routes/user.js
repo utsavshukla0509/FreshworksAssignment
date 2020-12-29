@@ -17,7 +17,7 @@ router.get("/read/:key", (req,res) => {
     readItem.handleRequest(req,res);
 });
 
-router.delete("/delete", (req,res) => {
+router.delete("/delete/:key", (req,res) => {
     deleteItem.handleRequest(req,res);
 });
 
