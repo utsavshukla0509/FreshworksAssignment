@@ -10,8 +10,12 @@ class DeleteItem{
         }
 
         let hashedNumber = HashedString(key);
-
         const path = "file" + hashedNumber + ".json";
+
+        if(memo[hashedNumber]){
+            return res.status(200).send("File is already in use");
+        }
+        memo[hashedNumber] = true;
 
         try {
             if (fs.existsSync(path)) {
@@ -21,6 +25,7 @@ class DeleteItem{
                 let found = userData.find((ele)=>{return (ele.key === key)}); 
 
                 if(found === undefined){
+                    memo[hashedNumber] = false;
                     return res.status(200).send("Key doesn't exist");
                 }
                 else{
@@ -29,17 +34,21 @@ class DeleteItem{
                         userData.splice(userData.findIndex(ele => ele.key === key) , 1);
                         let json_data = JSON.stringify(userData);
                         fs.writeFileSync(path, json_data);
-                        return res.status(200).json({"data" : user});
+                        memo[hashedNumber] = false;
+                        return res.status(200).send("Key is deleted");
                     }
                     else{
+                        memo[hashedNumber] = false;
                         res.status(200).send("Key is expired");
                     }
                 }
             }
             else{
+                memo[hashedNumber] = false;
                 return res.status(200).send("File doesn't exist");
             }
         } catch(err) {
+            memo[hashedNumber] = false;
             console.log(err);
         }
     }
