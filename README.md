@@ -74,7 +74,7 @@ Build a file-based key-value data store
 4. ## Commands Available
    
    ```
-   node server.js or nodemon  // to run the server
+   node server.js or nodemon  // to run the node server
    npm test                  // for checking Unit Tests
    ```
     
