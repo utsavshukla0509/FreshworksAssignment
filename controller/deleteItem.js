@@ -6,7 +6,7 @@ class DeleteItem{
         const key = req.params.key;
 
         if(key.length > 32){
-            return res.status(400).send("Key should be of 32 characters");
+            return res.status(405).send("Key should be of 32 characters");
         }
 
         let hashedNumber = HashedString(key);
@@ -26,7 +26,7 @@ class DeleteItem{
 
                 if(found === undefined){
                     memo[hashedNumber] = false;
-                    return res.status(200).send("Key doesn't exist");
+                    return res.status(405).send("Key doesn't exist");
                 }
                 else{
 
@@ -35,17 +35,17 @@ class DeleteItem{
                         let json_data = JSON.stringify(userData);
                         fs.writeFileSync(path, json_data);
                         memo[hashedNumber] = false;
-                        return res.status(200).send("Key is deleted");
+                        return res.status(200).send("Key is deleted successfully");
                     }
                     else{
                         memo[hashedNumber] = false;
-                        res.status(200).send("Key is expired");
+                        res.status(405).send("Key is expired");
                     }
                 }
             }
             else{
                 memo[hashedNumber] = false;
-                return res.status(200).send("File doesn't exist");
+                return res.status(405).send("File doesn't exist");
             }
         } catch(err) {
             memo[hashedNumber] = false;

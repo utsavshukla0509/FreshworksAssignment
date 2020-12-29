@@ -70,8 +70,8 @@ class CreateItem{
             }
             else{
                 fs.open(path, 'w', function (err, file) {
-                    console.log(file);
-                    console.log("file" + hashedNumber + " is created");
+                    // console.log(file);
+                    // console.log("file" + hashedNumber + " is created");
                 });
                  
                 let data = [];
