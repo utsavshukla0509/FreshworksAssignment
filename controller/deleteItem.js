@@ -5,7 +5,7 @@ class DeleteItem{
     handleRequest(req,res){
         const key = req.params.key;
 
-        if(key.length !== 32){
+        if(key.length > 32){
             return res.status(400).send("Key should be of 32 characters");
         }
 
