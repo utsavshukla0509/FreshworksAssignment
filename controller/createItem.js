@@ -22,14 +22,13 @@ class CreateItem{
         }
 
         let hashedNumber = HashedString(key);
-        const path = "file" + hashedNumber + ".json";
+        const path = file_path + "file" + hashedNumber + ".json";
         
         if(memo[hashedNumber] === true){
             return res.status(405).send("Given file is already in use");
         }
 
         memo[hashedNumber] = true;
-
 
         let user = { 
             "key" : key,
@@ -69,10 +68,10 @@ class CreateItem{
                 }
             }
             else{
-                fs.open(path, 'w', function (err, file) {
-                    // console.log(file);
-                    // console.log("file" + hashedNumber + " is created");
-                });
+                // fs.open(path, 'w', function (err, file) {
+                //     // console.log(file);
+                //     // console.log("file" + hashedNumber + " is created");
+                // });
                  
                 let data = [];
                 data.push(user);

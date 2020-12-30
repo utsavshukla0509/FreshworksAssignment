@@ -10,7 +10,7 @@ class DeleteItem{
         }
 
         let hashedNumber = HashedString(key);
-        const path = "file" + hashedNumber + ".json";
+        const path = file_path + "file" + hashedNumber + ".json";
 
         if(memo[hashedNumber]){
             return res.status(200).send("File is already in use");
