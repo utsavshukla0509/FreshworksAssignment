@@ -1,5 +1,6 @@
-# FreshworksAssignment(only supported for Linux)
-Build a file-based key-value data store
+# FreshworksAssignment
+Build a file-based key-value data store<br>
+*(only supported for Linux User)
 ## Table fo Contents
 
 1. **[Create user key](#createuserkey)**<br>
