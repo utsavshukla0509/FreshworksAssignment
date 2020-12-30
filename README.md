@@ -1,4 +1,4 @@
-# FreshworksAssignment
+# FreshworksAssignment(only supported for Linux)
 Build a file-based key-value data store
 ## Table fo Contents
 
